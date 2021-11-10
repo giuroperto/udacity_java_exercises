@@ -25,14 +25,11 @@ public class Main {
         int option = scanner.nextInt();
         scanner.nextLine();
 
-        if (option == 1) {
-            addNewContact();
-        } else if (option == 2) {
-            searchContact();
-        } else if (option == 3) {
-            exitProgram();
-        } else {
-            System.out.println("Invalid option");
+        switch (option) {
+            case 1 -> addNewContact();
+            case 2 -> searchContact();
+            case 3 -> exitProgram();
+            default -> System.out.println("Invalid option");
         }
     }
 
@@ -72,12 +69,10 @@ public class Main {
         int response = scanner.nextInt();
         scanner.nextLine();
 
-        if (response == 0) {
-            exitProgram();
-        } else if (response == 1) {
-            showMenu();
-        } else {
-            System.out.println("Invalid option!");
+        switch (response) {
+            case 0 -> exitProgram();
+            case 1 -> showMenu();
+            default -> System.out.println("Invalid option!");
         }
     }
 }
