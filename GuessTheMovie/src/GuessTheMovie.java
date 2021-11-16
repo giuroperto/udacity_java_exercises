@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class GuessTheMovie {
     static List<String> guess = new ArrayList<>();
-    static int letterOccurrance = 0;
     static boolean guessedLetter = false;
     static String wrongLetters = "";
     static boolean hasGuessed = false;
@@ -51,15 +50,13 @@ public class GuessTheMovie {
     }
 
     private static void checkLetter(String letter) {
-        letterOccurrance = 0;
         for(int i = 0; i < Game.numberLetters; i++) {
             if (Game.titleArray.get(i).equals(letter)) {
-                letterOccurrance++;
                 guess.set(i, letter);
             }
         }
 
-        guessedLetter = letterOccurrance > 0;
+        guessedLetter = Game.selectedTitle.indexOf(letter.charAt(0)) != -1;
 
         if (!guessedLetter) wrongLetters += letter;
     }
