@@ -1,5 +1,6 @@
 package com.udacity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -223,6 +224,8 @@ public class Game {
     public static void main(String args[]){
         Game game = new Game();
         gui = new GameUI(game);
-    }
 
+        List<Integer> array = new ArrayList<Integer>();
+        str.contains("iu");
+    }
 }
