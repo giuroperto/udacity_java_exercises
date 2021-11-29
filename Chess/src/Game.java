@@ -7,7 +7,8 @@ public class Game {
 
     public static void main(String[] args) {
         Queen queen = new Queen();
-        Position testPosition = new Position(3,10);
+        queen.position = new Position(3, 0);
+        Position testPosition = new Position(5,4);
         if (queen.isValidMove(testPosition)) {
             System.out.println("Yes, I can move there.");
         } else {

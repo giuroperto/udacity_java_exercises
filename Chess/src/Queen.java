@@ -1,26 +1,17 @@
 public class Queen extends Piece{
     @Override
     boolean isValidMove(Position newPosition) {
-        if (canMoveDiagonally(newPosition) || canMoveStraight(newPosition)) {
-            return true;
-        } else {
-            return false;
-        }
+        return super.isValidMove(newPosition) ?
+                (canMoveDiagonally(newPosition) || canMoveStraight(newPosition)) :
+                super.isValidMove(newPosition);
     }
 
     boolean canMoveDiagonally(Position newPosition) {
-        if (Math.abs(newPosition.row - position.row) == Math.abs(newPosition.column - position.column)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (Math.abs(newPosition.row - position.row)
+                == Math.abs(newPosition.column - position.column));
     }
 
     boolean canMoveStraight(Position newPosition) {
-        if (position.row == newPosition.row || position.column == newPosition.column) {
-            return true;
-        } else {
-            return false;
-        }
+        return (position.row == newPosition.row || position.column == newPosition.column);
     }
 }
