@@ -9,14 +9,14 @@ public class U2 extends Rocket {
     public boolean land() {
         chanceOfLandExplosion = 0.08 * (cargo / (maxWeight - rocketWeight));
         int randomNumber = (int) (Math.random() * 101);
-        return randomNumber <= chanceOfLandExplosion * 100;
+        return randomNumber >= chanceOfLandExplosion * 100;
     }
 
     @Override
     public boolean launch() {
         chanceOfLaunchExplosion = 0.04 * (cargo / (maxWeight - rocketWeight));
         int randomNumber = (int) (Math.random() * 101);
-        return randomNumber <= chanceOfLandExplosion * 100;
+        return randomNumber >= chanceOfLandExplosion * 100;
     }
 }
 

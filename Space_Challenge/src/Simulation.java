@@ -28,26 +28,54 @@ public class Simulation {
         U1 currentRocket = new U1();
 
         for (Item item : allItems) {
-            System.out.println("currentRocket: " + currentRocket.cargo);
-            if (currentRocket.cargo < (currentRocket.maxWeight - currentRocket.rocketWeight) &&
-                    currentRocket.cargo + (item.weight / 1000.0) <=
-                            (currentRocket.maxWeight - currentRocket.rocketWeight)) {
-                currentRocket.cargo += (item.weight / 1000.0);
-            } else {
+            if (currentRocket.cargo + (item.weight / 1000.0) >
+                    (currentRocket.maxWeight - currentRocket.rocketWeight)) {
                 U1Fleet.add(currentRocket);
+                System.out.println("u1 currentRocket: " + currentRocket.cargo);
                 currentRocket = new U1();
-                currentRocket.cargo += (item.weight / 1000.0);
             }
-        }
 
+            currentRocket.cargo += (item.weight / 1000.0);
+        }
         return U1Fleet;
     }
 
-//    public U1 createU1Rocket() {
-//
-//    }
-}
+    public ArrayList<U2> loadU2(ArrayList<Item> allItems) {
+        ArrayList<U2> U2Fleet = new ArrayList<>();
+        U2 currentRocket = new U2();
 
-//        It first tries to fill up 1 rocket with as many items as possible before creating a
-//        new rocket object and filling that one until all items are loaded.
-//        The method then returns the ArrayList of those U1 rockets that are fully loaded.
+        for (Item item : allItems) {
+            if (currentRocket.cargo + (item.weight / 1000.0) >
+                    (currentRocket.maxWeight - currentRocket.rocketWeight)) {
+                U2Fleet.add(currentRocket);
+                System.out.println("u2 currentRocket: " + currentRocket.cargo);
+                currentRocket = new U2();
+            }
+
+            currentRocket.cargo += (item.weight / 1000.0);
+        }
+        return U2Fleet;
+    }
+
+    public int runSimulation(ArrayList<Rocket> allRockets) {
+        int rocketCount = 0;
+
+        for (Rocket rocket : allRockets) {
+            boolean isLandSuccessful = rocket.land();
+            boolean isLaunchSuccessful = rocket.launch();
+
+
+            while (!isLandSuccessful) {
+                isLandSuccessful = rocket.land();
+                rocketCount += 1;
+            }
+
+            while (!isLaunchSuccessful) {
+                isLaunchSuccessful = rocket.launch();
+                rocketCount += 1;
+            }
+        }
+
+        return rocketCount;
+    }
+}

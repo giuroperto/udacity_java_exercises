@@ -6,22 +6,25 @@ public class Main {
         Simulation simulation = new Simulation();
 
         File filePhase1 = new File("phase-1.txt");
-        File filePhase2 = new File("phase-1.txt");
+        File filePhase2 = new File("phase-2.txt");
 
         ArrayList<Item> allItemsPhase1 = simulation.loadItems(filePhase1);
         ArrayList<Item> allItemsPhase2 = simulation.loadItems(filePhase2);
 
-        ArrayList<U1> fleetPhase1 = simulation.loadU1(allItemsPhase1);
-        ArrayList<U1> fleetPhase2 = simulation.loadU1(allItemsPhase2);
+        ArrayList<U1> U1FleetPhase1 = simulation.loadU1(allItemsPhase1);
+        ArrayList<U1> U1FleetPhase2 = simulation.loadU1(allItemsPhase2);
 
-        for (U1 rocket : fleetPhase1) {
-            System.out.println(rocket.land());
-//            System.out.println(rocket.cargo);
-        }
+        simulation.runSimulation(U1FleetPhase1);
+        simulation.runSimulation(U1FleetPhase2);
 
-        for (U1 rocket : fleetPhase2) {
-//            System.out.println(rocket.cargo);
-        }
+        ArrayList<U2> U2FleetPhase1 = simulation.loadU2(allItemsPhase1);
+        ArrayList<U2> U2FleetPhase2 = simulation.loadU2(allItemsPhase2);
+
+        simulation.runSimulation(U2FleetPhase1);
+        simulation.runSimulation(U2FleetPhase2);
+    }
+
+    public void printResult() {
 
     }
 }
