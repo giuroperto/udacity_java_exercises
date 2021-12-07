@@ -14,7 +14,7 @@ public class Simulation {
                 Item newItem = new Item();
                 String[] nextItem = fileScanner.nextLine().split("=");
                 newItem.name = nextItem[0];
-                newItem.weight = Integer.parseInt(nextItem[1]);
+                newItem.weight = Integer.parseInt(nextItem[1]) / 1000;
                 items.add(newItem);
             }
         } catch (FileNotFoundException e) {
@@ -23,59 +23,63 @@ public class Simulation {
         return items;
     }
 
-    public ArrayList<U1> loadU1(ArrayList<Item> allItems) {
-        ArrayList<U1> U1Fleet = new ArrayList<>();
+    public ArrayList<Rocket> loadU1(ArrayList<Item> allItems) {
+        ArrayList<Rocket> U1Fleet = new ArrayList<>();
         U1 currentRocket = new U1();
 
         for (Item item : allItems) {
-            if (currentRocket.cargo + (item.weight / 1000.0) >
-                    (currentRocket.maxWeight - currentRocket.rocketWeight)) {
+//            System.out.println("current item: " + item.weight);
+            if (!currentRocket.canCarry(item)) {
                 U1Fleet.add(currentRocket);
-                System.out.println("u1 currentRocket: " + currentRocket.cargo);
+//                System.out.println("u1 currentRocket: " + currentRocket.cargo);
                 currentRocket = new U1();
             }
-
-            currentRocket.cargo += (item.weight / 1000.0);
+            currentRocket.carry(item);
+//            System.out.println("current cargo: " + currentRocket.cargo);
         }
+        U1Fleet.add(currentRocket);
         return U1Fleet;
     }
 
-    public ArrayList<U2> loadU2(ArrayList<Item> allItems) {
-        ArrayList<U2> U2Fleet = new ArrayList<>();
+    public ArrayList<Rocket> loadU2(ArrayList<Item> allItems) {
+        ArrayList<Rocket> U2Fleet = new ArrayList<>();
         U2 currentRocket = new U2();
 
         for (Item item : allItems) {
-            if (currentRocket.cargo + (item.weight / 1000.0) >
-                    (currentRocket.maxWeight - currentRocket.rocketWeight)) {
+            if (!currentRocket.canCarry(item)) {
                 U2Fleet.add(currentRocket);
-                System.out.println("u2 currentRocket: " + currentRocket.cargo);
+//                System.out.println("u2 currentRocket: " + currentRocket.cargo);
                 currentRocket = new U2();
             }
-
-            currentRocket.cargo += (item.weight / 1000.0);
+            currentRocket.carry(item);
         }
+        U2Fleet.add(currentRocket);
         return U2Fleet;
     }
 
     public int runSimulation(ArrayList<Rocket> allRockets) {
-        int rocketCount = 0;
+        int rocketCount = allRockets.size();
+        int rocketCost = 0;
 
         for (Rocket rocket : allRockets) {
-            boolean isLandSuccessful = rocket.land();
             boolean isLaunchSuccessful = rocket.launch();
-
-
-            while (!isLandSuccessful) {
-                isLandSuccessful = rocket.land();
-                rocketCount += 1;
-            }
+            boolean isLandSuccessful = rocket.land();
+//            System.out.println("isLaunchSuccessful: " + isLaunchSuccessful);
+//            System.out.println("isLandSuccessful: " + isLandSuccessful);
+            rocketCost = rocket.rocketCost;
+//            System.out.println("rocketCost: " + rocketCost);
 
             while (!isLaunchSuccessful) {
-                isLaunchSuccessful = rocket.launch();
                 rocketCount += 1;
+                isLaunchSuccessful = rocket.launch();
+            }
+
+            while (!isLandSuccessful) {
+                rocketCount += 1;
+                isLandSuccessful = rocket.land();
             }
         }
 
-        return rocketCount;
+        return rocketCount * rocketCost;
     }
 }

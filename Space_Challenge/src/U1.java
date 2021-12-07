@@ -1,9 +1,12 @@
 public class U1 extends Rocket {
-    int rocketWeight = 10;
-    int maxWeight = 18;
     double chanceOfLaunchExplosion;
     double chanceOfLandExplosion;
-    double cargo;
+
+    U1() {
+        rocketWeight = 10;
+        maxWeight = 18;
+        rocketCost = 100;
+    }
 
     @Override
     public boolean land() {
@@ -20,7 +23,3 @@ public class U1 extends Rocket {
     }
 
 }
-
-
-//    Rocket cost = $100 Million
-//return either true or false based on a random number using the probability equation for each
