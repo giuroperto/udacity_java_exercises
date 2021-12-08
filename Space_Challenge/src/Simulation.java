@@ -25,35 +25,37 @@ public class Simulation {
 
     public ArrayList<Rocket> loadU1(ArrayList<Item> allItems) {
         ArrayList<Rocket> U1Fleet = new ArrayList<>();
+        ArrayList<Item> copyItems = new ArrayList<>(allItems);
         U1 currentRocket = new U1();
 
-        for (Item item : allItems) {
-//            System.out.println("current item: " + item.weight);
-            if (!currentRocket.canCarry(item)) {
-                U1Fleet.add(currentRocket);
-//                System.out.println("u1 currentRocket: " + currentRocket.cargo);
-                currentRocket = new U1();
+        while (copyItems.size() > 0) {
+            for (int i = copyItems.size() - 1; i >= 0; i--) {
+                if (currentRocket.canCarry(copyItems.get(i))) {
+                    currentRocket.carry(copyItems.get(i));
+                    copyItems.remove(copyItems.get(i));
+                }
             }
-            currentRocket.carry(item);
-//            System.out.println("current cargo: " + currentRocket.cargo);
+            U1Fleet.add(currentRocket);
+            currentRocket = new U1();
         }
-        U1Fleet.add(currentRocket);
         return U1Fleet;
     }
 
     public ArrayList<Rocket> loadU2(ArrayList<Item> allItems) {
         ArrayList<Rocket> U2Fleet = new ArrayList<>();
+        ArrayList<Item> copyItems = new ArrayList<>(allItems);
         U2 currentRocket = new U2();
 
-        for (Item item : allItems) {
-            if (!currentRocket.canCarry(item)) {
-                U2Fleet.add(currentRocket);
-//                System.out.println("u2 currentRocket: " + currentRocket.cargo);
-                currentRocket = new U2();
+        while (copyItems.size() > 0) {
+            for (int i = copyItems.size() - 1; i >= 0; i--) {
+                if (currentRocket.canCarry(copyItems.get(i))) {
+                    currentRocket.carry(copyItems.get(i));
+                    copyItems.remove(copyItems.get(i));
+                }
             }
-            currentRocket.carry(item);
+            U2Fleet.add(currentRocket);
+            currentRocket = new U2();
         }
-        U2Fleet.add(currentRocket);
         return U2Fleet;
     }
 
@@ -64,10 +66,7 @@ public class Simulation {
         for (Rocket rocket : allRockets) {
             boolean isLaunchSuccessful = rocket.launch();
             boolean isLandSuccessful = rocket.land();
-//            System.out.println("isLaunchSuccessful: " + isLaunchSuccessful);
-//            System.out.println("isLandSuccessful: " + isLandSuccessful);
             rocketCost = rocket.rocketCost;
-//            System.out.println("rocketCost: " + rocketCost);
 
             while (!isLaunchSuccessful) {
                 rocketCount += 1;
