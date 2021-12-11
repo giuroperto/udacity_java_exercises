@@ -46,7 +46,8 @@ public class GameUI extends JPanel {
         //create new game buttons
         JButton newGameButton = new JButton("New Single Player Game");
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        newGameButton.addActionListener(new ActionListener() {  // connects the new game button to its buttonPressed method
+        newGameButton.addActionListener(new ActionListener() {
+            // connects the new game button to its buttonPressed method
             public void actionPerformed(ActionEvent e)
             {
                 newGameButtonPressed(false);
@@ -55,14 +56,15 @@ public class GameUI extends JPanel {
 
         JButton new2PlayerGameButton = new JButton("New 2 Player Game");
         new2PlayerGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        new2PlayerGameButton.addActionListener(new ActionListener() {  // connects the new game button to its buttonPressed method
+        new2PlayerGameButton.addActionListener(new ActionListener() {
+            // connects the new game button to its buttonPressed method
             public void actionPerformed(ActionEvent e)
             {
                 newGameButtonPressed(true);
             }
         });
 
-        // control what happens when new game buttons cickes
+        // control what happens when new game buttons clicks
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -93,18 +95,16 @@ public class GameUI extends JPanel {
         final int HEIGHT = 650;
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
-        //create the frame that would include this panel and siplay it
+        //create the frame that would include this panel and display it
         frame = new JFrame();
         frame.add(this);            // add this panel to the frame
         frame.pack();               // shrink the window to the appropriate size
         frame.setResizable(false);  // make the window not resizable
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // close the application when the window is closed
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // close the application when the window is closed
         frame.setVisible(true);     // show the window
 
     }
-
-
-
 
     @Override
     public void paint(Graphics g) {
@@ -159,7 +159,8 @@ public class GameUI extends JPanel {
     }
 
     public void gameOver(String message){
-        JOptionPane.showMessageDialog(null, message, "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,
+                message, "Game Over!", JOptionPane.INFORMATION_MESSAGE);
     }
 
 

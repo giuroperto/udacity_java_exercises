@@ -1,6 +1,5 @@
 package com.udacity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -12,7 +11,8 @@ public class Game {
     private char turn; // who's turn is it, 'x' or 'o' ? x always starts
     private boolean twoPlayer; // true if this is a 2 player game, false if AI playing
     private char [][] grid; // a 2D array of chars representing the game grid
-    private int freeSpots; // counts the number of empty spots remaining on the board (starts from 9 and counts down)
+    private int freeSpots; // counts the number of empty spots remaining on the board
+    // (starts from 9 and counts down)
     private static GameUI gui;
 
     /**
@@ -23,7 +23,8 @@ public class Game {
     }
 
     /**
-     * Create a new game by clearing the 2D grid and restarting the freeSpots counter and setting the turn to x
+     * Create a new game by clearing the 2D grid and restarting the freeSpots counter and
+     * setting the turn to x
      * @param twoPlayer: true if this is a 2 player game, false if playing against the computer
      */
     public void newGame(boolean twoPlayer){
