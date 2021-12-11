@@ -154,17 +154,17 @@ public class Game {
         String none = "None";
 
         //Check diagonals
-        String diagonal = checkDiagonals(grid);
+        String diagonal = checkDiagonals();
         if (diagonal.equals("x")) return xWins;
         if (diagonal.equals("o")) return oWins;
 
         //Check columns
-        String column = checkColumn(grid);
+        String column = checkColumn();
         if (column.equals("x")) return xWins;
         if (column.equals("o")) return oWins;
 
         //Check rows
-        String row = checkRow(grid);
+        String row = checkRow();
         if (row.equals("x")) return xWins;
         if (row.equals("o")) return oWins;
 
@@ -174,25 +174,19 @@ public class Game {
         return none;
     }
 
-    public String checkDiagonals(char[][] grid) {
-        if ((gridAt(0,0) == '-' || gridAt(2,2) == '-') &&
-                (gridAt(0,2) == '-' || gridAt(2,0) == '-')) {
-            return "None";
-        } else if (gridAt(1,1) == '-') {
-            return "None";
+    public String checkDiagonals() {
+        if ((gridAt(0,0) == 'x' && gridAt(1,1) == 'x' && gridAt(2,2) == 'x') ||
+                (gridAt(0,2) == 'x' && gridAt(1,1) == 'x' && gridAt(2,0) == 'x')) {
+            return "x";
+        } else if ((gridAt(0,0) == 'o' && gridAt(1,1) == 'o' && gridAt(2,2) == 'o') ||
+                (gridAt(0,2) == 'o' && gridAt(1,1) == 'o' && gridAt(2,0) == 'o')) {
+            return "o";
         } else {
-            if ((gridAt(0,0) == 'x' && gridAt(1,1) == 'x' && gridAt(2,2) == 'x') ||
-                    (gridAt(0,2) == 'x' && gridAt(1,1) == 'x' && gridAt(2,0) == 'x')) {
-                return "x";
-            } else if ((gridAt(0,0) == 'o' && gridAt(1,1) == 'o' && gridAt(2,2) == 'o') ||
-                    (gridAt(0,2) == 'o' && gridAt(1,1) == 'o' && gridAt(2,0) == 'o')) {
-                return "o";
-            }
+            return "None";
         }
-        return "None";
     }
 
-    public String checkRow(char[][] grid) {
+    public String checkRow() {
         for (int j = 0; j < 3; j++) {
             if ((gridAt(0, j) == 'x') &&
                     (gridAt(1, j) == 'x') &&
@@ -205,7 +199,7 @@ public class Game {
         return "None";
     }
 
-    public String checkColumn(char[][] grid) {
+    public String checkColumn() {
         for (int i = 0; i < 3; i++) {
             if ((gridAt(i, 0) == 'x') &&
                     (gridAt(i, 1) == 'x') &&
